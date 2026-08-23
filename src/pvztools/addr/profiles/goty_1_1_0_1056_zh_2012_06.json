@@ -1,0 +1,1286 @@
+{
+ "schema_version": 2,
+ "id": "goty_1_1_0_1056_zh_2012_06",
+ "name": "1.1.0.1056 GOTY 2012 (zh)",
+ "lang": "zh",
+ "stamp": "0x4fcd7be2",
+ "version_id": 2006,
+ "family": "goty_zh2012",
+ "conventions": "goty_zh2012",
+ "image_base": "0x400000",
+ "verified": false,
+ "verified_fields": [],
+ "warnings": [],
+ "capability": "FULL",
+ "source": "facts derived from lmintlcx/pvztoolkit data.cpp (GPL-3.0); GPL source not copied, numbers re-expressed per docs/parity-pvztoolkit.md §6",
+ "field_sources": {
+  "board.projectiles": "derived: 1051 value + GOTY delta rule (DESIGN §3.5), unverified",
+  "board.coins": "derived: 1051 value + GOTY delta rule (DESIGN §3.5), unverified",
+  "board.wave_total": "derived: 1051 value + GOTY delta rule (DESIGN §3.5), unverified",
+  "board.global_counter": "derived: 1051 value + GOTY delta rule (DESIGN §3.5), unverified",
+  "board.wave": "derived: 1051 value + GOTY delta rule (DESIGN §3.5), unverified",
+  "board.wave_hp_threshold": "derived: 1051 value + GOTY delta rule (DESIGN §3.5), unverified",
+  "board.countdown": "derived: 1051 value + GOTY delta rule (DESIGN §3.5), unverified",
+  "board.countdown_start": "derived: 1051 value + GOTY delta rule (DESIGN §3.5), unverified",
+  "board.huge_wave_countdown": "derived: 1051 value + GOTY delta rule (DESIGN §3.5), unverified",
+  "objects.plant.state": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.plant.hp": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.plant.max_hp": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.plant.state_countdown": "source-map §4",
+  "objects.zombie.row": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.zombie.type": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.zombie.x": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.zombie.y": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.zombie.speed": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.zombie.hp": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.zombie.max_hp": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.zombie.helmet_hp": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.zombie.shield_hp": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.seed_packet.usable": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.projectile.stride": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "objects.coin.stride": "docs/DESIGN.md §4 (lonelystar 1051 memory map / AvZ / pvzscripts)",
+  "board.grid_cel_look": "source-map §4",
+  "board.grid_cel_offset": "source-map §4",
+  "board.grid_cel_fog": "source-map §4",
+  "board.enable_grave_stones": "source-map §4",
+  "board.special_grave_x": "source-map §4",
+  "board.special_grave_y": "source-map §4",
+  "board.fog_offset": "source-map §4",
+  "board.fog_blown_countdown": "source-map §4",
+  "board.wave_row_got_mowered": "source-map §4",
+  "board.mower_bonus_remaining": "source-map §4",
+  "board.ice_min_x": "source-map §4",
+  "board.prev_mouse_x": "source-map §4",
+  "board.prev_mouse_y": "source-map §4",
+  "board.total_spawned_waves": "source-map §4",
+  "board.tutorial_state": "source-map §4",
+  "board.last_bungee_wave": "source-map §4",
+  "board.zombie_health_wave_start": "source-map §4",
+  "board.level_complete": "source-map §4",
+  "board.board_fade_out_counter": "source-map §4",
+  "board.next_survival_stage_counter": "source-map §4",
+  "board.board_rand_seed": "source-map §4",
+  "board.time_stop_counter": "source-map §4",
+  "board.cob_cursor_delay": "source-map §4",
+  "board.cob_mouse_x": "source-map §4",
+  "board.cob_mouse_y": "source-map §4",
+  "board.killed_yeti": "source-map §4",
+  "board.mode_flags": "source-map §4",
+  "board.level_coins_collected": "source-map §4",
+  "board.gargantuar_cob_kills": "source-map §4",
+  "board.zombies_max_size": "source-map §4",
+  "board.zombies_size": "source-map §4",
+  "board.zombies_next_key": "source-map §4",
+  "board.plants_max_size": "source-map §4",
+  "board.plants_size": "source-map §4",
+  "board.plants_next_key": "source-map §4",
+  "board.projectile_count_max": "source-map §4",
+  "board.projectiles_max_size": "source-map §4",
+  "board.projectiles_size": "source-map §4",
+  "board.projectiles_next_key": "source-map §4",
+  "board.coin_count_max": "source-map §4",
+  "board.coins_max_size": "source-map §4",
+  "board.coins_size": "source-map §4",
+  "board.coins_next_key": "source-map §4",
+  "board.mowers_max_size": "source-map §4",
+  "board.mowers_size": "source-map §4",
+  "board.mowers_next_key": "source-map §4",
+  "board.grid_items_max_size": "source-map §4",
+  "board.grid_items_size": "source-map §4",
+  "board.grid_items_next_key": "source-map §4",
+  "objects.plant.disappear_countdown": "source-map §4",
+  "objects.plant.do_special_countdown": "source-map §4",
+  "objects.plant.target_x": "source-map §4",
+  "objects.plant.target_y": "source-map §4",
+  "objects.plant.shooting_counter": "source-map §4",
+  "objects.plant.target_zombie_id": "source-map §4",
+  "objects.plant.is_on_board": "source-map §4",
+  "objects.plant.highlighted": "source-map §4",
+  "objects.zombie.phase_counter": "source-map §4",
+  "objects.zombie.from_wave": "source-map §4",
+  "objects.zombie.target_col": "source-map §4",
+  "objects.zombie.altitude": "source-map §4",
+  "objects.zombie.chilled_counter": "source-map §4",
+  "objects.zombie.buttered_counter": "source-map §4",
+  "objects.zombie.ice_trap_counter": "source-map §4",
+  "objects.zombie.mind_controlled": "source-map §4",
+  "objects.zombie.has_head": "source-map §4",
+  "objects.zombie.has_arm": "source-map §4",
+  "objects.zombie.has_object": "source-map §4",
+  "objects.zombie.in_pool": "source-map §4",
+  "objects.zombie.helm_type": "source-map §4",
+  "objects.zombie.helmet_max_hp": "source-map §4",
+  "objects.zombie.shield_type": "source-map §4",
+  "objects.zombie.shield_max_hp": "source-map §4",
+  "objects.zombie.flying_hp": "source-map §4",
+  "objects.zombie.flying_max_hp": "source-map §4",
+  "objects.zombie.related_zombie_id": "source-map §4",
+  "objects.zombie.follower_zombie_ids": "source-map §4",
+  "objects.zombie.vel_z": "source-map §4",
+  "objects.zombie.target_row": "source-map §4",
+  "objects.projectile.row": "source-map §4",
+  "objects.projectile.pos_x": "source-map §4",
+  "objects.projectile.pos_y": "source-map §4",
+  "objects.projectile.pos_z": "source-map §4",
+  "objects.projectile.vel_x": "source-map §4",
+  "objects.projectile.vel_y": "source-map §4",
+  "objects.projectile.vel_z": "source-map §4",
+  "objects.projectile.dead": "source-map §4",
+  "objects.projectile.motion_type": "source-map §4",
+  "objects.projectile.type": "source-map §4",
+  "objects.projectile.age": "source-map §4",
+  "objects.projectile.cob_target_x": "source-map §4",
+  "objects.projectile.cob_target_row": "source-map §4",
+  "objects.coin.pos_x": "source-map §4",
+  "objects.coin.pos_y": "source-map §4",
+  "objects.coin.dead": "source-map §4",
+  "objects.coin.coin_age": "source-map §4",
+  "objects.coin.is_being_collected": "source-map §4",
+  "objects.coin.type": "source-map §4",
+  "objects.coin.motion": "source-map §4",
+  "objects.coin.usable_seed_type": "source-map §4",
+  "objects.lawn_mower.pos_x": "source-map §4",
+  "objects.lawn_mower.row": "source-map §4",
+  "objects.lawn_mower.mower_state": "source-map §4",
+  "objects.lawn_mower.visible": "source-map §4",
+  "objects.lawn_mower.mower_type": "source-map §4",
+  "objects.grid_item.state": "source-map §4",
+  "objects.grid_item.counter": "source-map §4",
+  "objects.grid_item.zombie_type": "source-map §4",
+  "objects.grid_item.seed_type": "source-map §4",
+  "objects.grid_item.scary_pot_type": "source-map §4",
+  "objects.grid_item.transparent_counter": "source-map §4",
+  "objects.grid_item.sun_count": "source-map §4",
+  "objects.seed_packet.index": "source-map §4",
+  "objects.seed_packet.offset_x": "source-map §4",
+  "objects.seed_packet.slot_machine_countdown": "source-map §4",
+  "objects.seed_packet.refreshing": "source-map §4",
+  "objects.seed_packet.times_used": "source-map §4",
+  "objects.seed_bank.cutscene_darken": "source-map §4",
+  "objects.seed_bank.conveyor_belt_counter": "source-map §4",
+  "objects.cursor.seed_bank_index": "source-map §4",
+  "objects.cursor.type": "source-map §4",
+  "objects.cursor.imitater_type": "source-map §4",
+  "objects.cursor.glove_plant_id": "source-map §4",
+  "objects.cursor.cob_cannon_plant_id": "source-map §4",
+  "objects.challenge.challenge_state": "source-map §4",
+  "objects.challenge.challenge_state_counter": "source-map §4",
+  "objects.challenge.conveyor_belt_counter": "source-map §4",
+  "objects.challenge.challenge_score": "source-map §4",
+  "objects.challenge.scary_potter_pots": "source-map §4",
+  "objects.challenge.rain_counter": "source-map §4",
+  "objects.zombie.zombatar_head_reanim": "source-map §4",
+  "objects.zombie.fireball_row": "source-map §4",
+  "objects.zombie.is_fireball": "source-map §4",
+  "lawn_app.zen_garden": "source-map §4",
+  "lawn_app.app_counter": "source-map §4",
+  "lawn_app.app_rand_seed": "source-map §4",
+  "lawn_app.board_result": "source-map §4"
+ },
+ "globals": {
+  "lawn_app": {
+   "rva": "0x355e0c",
+   "source": "toolkit:lawn"
+  },
+  "exe_path_str": {
+   "rva": "0x3525b0",
+   "source": "toolkit:path"
+  }
+ },
+ "lawn_app": {
+  "frame_duration": "0x4b4",
+  "board": "0x868",
+  "game_selector": "0x870",
+  "tod_mode": "0x919",
+  "game_mode": "0x91c",
+  "game_ui": "0x920",
+  "free_planting": "0x938",
+  "effect_system": "0x944",
+  "player_info": "0x950",
+  "music": "0x960",
+  "zen_garden": "0x940",
+  "app_counter": "0x95c",
+  "app_rand_seed": "0x994",
+  "board_result": "0x9ac"
+ },
+ "board": {
+  "zombies": "0xa8",
+  "zombie_count_max": "0xac",
+  "plants": "0xc4",
+  "plant_count_max": "0xc8",
+  "plant_next_index": "0xd0",
+  "mowers": "0x118",
+  "mower_count_max": "0x11c",
+  "mower_count": "0x128",
+  "grid_items": "0x134",
+  "grid_item_count_max": "0x138",
+  "cursor": "0x150",
+  "seed_bank": "0x15c",
+  "cutscene": "0x174",
+  "challenge": "0x178",
+  "paused": "0x17c",
+  "grid_type": "0x180",
+  "row_type": "0x5f0",
+  "ice_trail_cd": "0x63c",
+  "spawn_list": "0x6cc",
+  "allowed_types": "0x54ec",
+  "scene": "0x5564",
+  "adventure_level": "0x5568",
+  "sun": "0x5578",
+  "main_counter": "0x5580",
+  "debug_mode": "0x5610",
+  "pool_sparkly_particle_id": "0x5638",
+  "projectiles": "0xe0",
+  "coins": "0xfc",
+  "wave_total": "0x557c",
+  "global_counter": "0x5584",
+  "wave": "0x5594",
+  "wave_hp_threshold": "0x55ac",
+  "countdown": "0x55b4",
+  "countdown_start": "0x55b8",
+  "huge_wave_countdown": "0x55bc",
+  "grid_cel_look": "0x258",
+  "grid_cel_offset": "0x330",
+  "grid_cel_fog": "0x4e0",
+  "enable_grave_stones": "0x5dc",
+  "special_grave_x": "0x5e0",
+  "special_grave_y": "0x5e4",
+  "fog_offset": "0x5e8",
+  "fog_blown_countdown": "0x5ec",
+  "wave_row_got_mowered": "0x608",
+  "mower_bonus_remaining": "0x620",
+  "ice_min_x": "0x624",
+  "prev_mouse_x": "0x5570",
+  "prev_mouse_y": "0x5574",
+  "total_spawned_waves": "0x5598",
+  "tutorial_state": "0x559c",
+  "last_bungee_wave": "0x55a8",
+  "zombie_health_wave_start": "0x55b0",
+  "level_complete": "0x5614",
+  "board_fade_out_counter": "0x5618",
+  "next_survival_stage_counter": "0x561c",
+  "board_rand_seed": "0x5634",
+  "time_stop_counter": "0x5760",
+  "cob_cursor_delay": "0x576c",
+  "cob_mouse_x": "0x5770",
+  "cob_mouse_y": "0x5774",
+  "killed_yeti": "0x5778",
+  "mode_flags": "0x5779",
+  "level_coins_collected": "0x5788",
+  "gargantuar_cob_kills": "0x578c",
+  "zombies_max_size": "0xb0",
+  "zombies_size": "0xb8",
+  "zombies_next_key": "0xbc",
+  "plants_max_size": "0xcc",
+  "plants_size": "0xd4",
+  "plants_next_key": "0xd8",
+  "projectile_count_max": "0xe4",
+  "projectiles_max_size": "0xe8",
+  "projectiles_size": "0xf0",
+  "projectiles_next_key": "0xf4",
+  "coin_count_max": "0x100",
+  "coins_max_size": "0x104",
+  "coins_size": "0x10c",
+  "coins_next_key": "0x110",
+  "mowers_max_size": "0x120",
+  "mowers_size": "0x128",
+  "mowers_next_key": "0x12c",
+  "grid_items_max_size": "0x13c",
+  "grid_items_size": "0x144",
+  "grid_items_next_key": "0x148"
+ },
+ "objects": {
+  "zombie": {
+   "stride": "0x168",
+   "fields": {
+    "status": "0x28",
+    "dead": "0xec",
+    "row": "0x1c",
+    "type": "0x24",
+    "x": "0x2c",
+    "y": "0x30",
+    "speed": "0x34",
+    "hp": "0xc8",
+    "max_hp": "0xcc",
+    "helmet_hp": "0xd0",
+    "shield_hp": "0xdc",
+    "phase_counter": "0x68",
+    "from_wave": "0x6c",
+    "target_col": "0x80",
+    "altitude": "0x84",
+    "chilled_counter": "0xac",
+    "buttered_counter": "0xb0",
+    "ice_trap_counter": "0xb4",
+    "mind_controlled": "0xb8",
+    "has_head": "0xba",
+    "has_arm": "0xbb",
+    "has_object": "0xbc",
+    "in_pool": "0xbd",
+    "helm_type": "0xc4",
+    "helmet_max_hp": "0xd4",
+    "shield_type": "0xd8",
+    "shield_max_hp": "0xe0",
+    "flying_hp": "0xe4",
+    "flying_max_hp": "0xe8",
+    "related_zombie_id": "0xf0",
+    "follower_zombie_ids": "0xf4",
+    "vel_z": "0x120",
+    "target_row": "0x130",
+    "zombatar_head_reanim": "0x148",
+    "fireball_row": "0x14c",
+    "is_fireball": "0x150"
+   }
+  },
+  "plant": {
+   "stride": "0x14c",
+   "fields": {
+    "row": "0x1c",
+    "type": "0x24",
+    "col": "0x28",
+    "imitater_type": "0x138",
+    "dead": "0x141",
+    "squished": "0x142",
+    "asleep": "0x143",
+    "state": "0x3c",
+    "hp": "0x40",
+    "max_hp": "0x44",
+    "state_countdown": "0x54",
+    "disappear_countdown": "0x4c",
+    "do_special_countdown": "0x50",
+    "target_x": "0x80",
+    "target_y": "0x84",
+    "shooting_counter": "0x90",
+    "target_zombie_id": "0x12c",
+    "is_on_board": "0x144",
+    "highlighted": "0x145"
+   }
+  },
+  "lawn_mower": {
+   "stride": "0x48",
+   "fields": {
+    "dead": "0x30",
+    "pos_x": "0x8",
+    "row": "0x14",
+    "mower_state": "0x2c",
+    "visible": "0x31",
+    "mower_type": "0x34"
+   }
+  },
+  "grid_item": {
+   "stride": "0xec",
+   "fields": {
+    "type": "0x8",
+    "col": "0x10",
+    "row": "0x14",
+    "dead": "0x20",
+    "state": "0xc",
+    "counter": "0x18",
+    "zombie_type": "0x3c",
+    "seed_type": "0x40",
+    "scary_pot_type": "0x44",
+    "transparent_counter": "0x4c",
+    "sun_count": "0x50"
+   }
+  },
+  "cursor": {
+   "stride": null,
+   "fields": {
+    "grab": "0x30",
+    "seed_bank_index": "0x24",
+    "type": "0x28",
+    "imitater_type": "0x2c",
+    "glove_plant_id": "0x38",
+    "cob_cannon_plant_id": "0x40"
+   }
+  },
+  "seed_bank": {
+   "stride": null,
+   "fields": {
+    "count": "0x24",
+    "packets": "0x28",
+    "cutscene_darken": "0x348",
+    "conveyor_belt_counter": "0x34c"
+   }
+  },
+  "challenge": {
+   "stride": null,
+   "fields": {
+    "endless_round": "0x6c",
+    "challenge_state": "0x54",
+    "challenge_state_counter": "0x58",
+    "conveyor_belt_counter": "0x5c",
+    "challenge_score": "0x60",
+    "scary_potter_pots": "0xb0",
+    "rain_counter": "0xb4"
+   }
+  },
+  "effect_system": {
+   "stride": null,
+   "fields": {
+    "particle_holder": "0x0"
+   }
+  },
+  "particle_holder": {
+   "stride": null,
+   "fields": {
+    "particles": "0x0",
+    "particle_count_max": "0x4"
+   }
+  },
+  "particle_system": {
+   "stride": "0x2c",
+   "fields": {
+    "type": "0x0",
+    "dead": "0x1c"
+   }
+  },
+  "seed_packet": {
+   "stride": "0x50",
+   "fields": {
+    "cd_elapsed": "0x24",
+    "cd_total": "0x28",
+    "type": "0x34",
+    "imitater_type": "0x38",
+    "usable": "0x48",
+    "index": "0x2c",
+    "offset_x": "0x30",
+    "slot_machine_countdown": "0x3c",
+    "refreshing": "0x49",
+    "times_used": "0x4c"
+   }
+  },
+  "projectile": {
+   "stride": "0x94",
+   "fields": {
+    "row": "0x1c",
+    "pos_x": "0x30",
+    "pos_y": "0x34",
+    "pos_z": "0x38",
+    "vel_x": "0x3c",
+    "vel_y": "0x40",
+    "vel_z": "0x44",
+    "dead": "0x50",
+    "motion_type": "0x58",
+    "type": "0x5c",
+    "age": "0x60",
+    "cob_target_x": "0x80",
+    "cob_target_row": "0x84"
+   }
+  },
+  "coin": {
+   "stride": "0xd8",
+   "fields": {
+    "pos_x": "0x24",
+    "pos_y": "0x28",
+    "dead": "0x38",
+    "coin_age": "0x4c",
+    "is_being_collected": "0x50",
+    "type": "0x58",
+    "motion": "0x5c",
+    "usable_seed_type": "0x68"
+   }
+  }
+ },
+ "achievements_count": 20,
+ "player_info": {
+  "level": "0x4c",
+  "money": "0x50",
+  "playthrough": "0x54",
+  "challenge_records": "0x58",
+  "tree_height": "0x11c",
+  "purchases": "0x1e8",
+  "achievements": "0x24"
+ },
+ "patches": {
+  "main_loop_block": {
+   "sites": [
+    {
+     "rva": "0x22941e",
+     "on": "fe",
+     "off": "c8",
+     "source": "toolkit:block_main_loop"
+    }
+   ],
+   "level": "medium"
+  },
+  "sun_cap_unlock": {
+   "sites": [
+    {
+     "rva": "0x3c0c1",
+     "on": "eb",
+     "off": "7e",
+     "source": "toolkit:unlock_sun_limit"
+    }
+   ],
+   "level": "low"
+  },
+  "auto_collect": {
+   "sites": [
+    {
+     "rva": "0x3cc72",
+     "on": "eb",
+     "off": "75",
+     "source": "toolkit:auto_collected"
+    }
+   ],
+   "level": "low"
+  },
+  "no_loot_drop": {
+   "sites": [
+    {
+     "rva": "0x14bfe6",
+     "on": "66",
+     "off": "5b",
+     "source": "toolkit:not_drop_loot"
+    }
+   ],
+   "level": "low"
+  },
+  "unlimited_fertilizer": {
+   "sites": [
+    {
+     "rva": "0x134d7b",
+     "on": "39",
+     "off": "ff",
+     "source": "toolkit:fertilizer_unlimited"
+    }
+   ],
+   "level": "low"
+  },
+  "unlimited_bug_spray": {
+   "sites": [
+    {
+     "rva": "0x134e73",
+     "on": "39",
+     "off": "ff",
+     "source": "toolkit:bug_spray_unlimited"
+    }
+   ],
+   "level": "low"
+  },
+  "unlimited_chocolate": {
+   "sites": [
+    {
+     "rva": "0x134995",
+     "on": "39",
+     "off": "ff",
+     "source": "toolkit:chocolate_unlimited"
+    },
+    {
+     "rva": "0x134a17",
+     "on": "39",
+     "off": "ff",
+     "source": "toolkit:chocolate_unlimited"
+    }
+   ],
+   "level": "low"
+  },
+  "unlimited_tree_food": {
+   "sites": [
+    {
+     "rva": "0x3885d",
+     "on": "39",
+     "off": "ff",
+     "source": "toolkit:tree_food_unlimited"
+    }
+   ],
+   "level": "low"
+  },
+  "place_anywhere": {
+   "sites": [
+    {
+     "rva": "0x1bd2e",
+     "on": "81",
+     "off": "84",
+     "source": "toolkit:placed_anywhere"
+    },
+    {
+     "rva": "0x44790",
+     "on": "eb",
+     "off": "74",
+     "source": "toolkit:placed_anywhere_preview"
+    },
+    {
+     "rva": "0x35579",
+     "on": "8d",
+     "off": "84",
+     "source": "toolkit:placed_anywhere_iz"
+    }
+   ],
+   "level": "low"
+  },
+  "fast_conveyor": {
+   "sites": [
+    {
+     "rva": "0x2e58f",
+     "on": "80",
+     "off": "8f",
+     "source": "toolkit:fast_belt"
+    },
+    {
+     "rva": "0x9f6fe",
+     "on": "33",
+     "off": "85",
+     "source": "toolkit:fast_belt"
+    }
+   ],
+   "level": "low"
+  },
+  "sticky_shovel": {
+   "sites": [
+    {
+     "rva": "0x1e36e",
+     "on": "39",
+     "off": "89",
+     "source": "toolkit:lock_shovel"
+    }
+   ],
+   "level": "low"
+  },
+  "rake_unlimited": {
+   "sites": [
+    {
+     "rva": "0x17731",
+     "on": "0f80",
+     "off": "0f84",
+     "source": "toolkit:rake_unlimited"
+    }
+   ],
+   "level": "low",
+   "temporary": true
+  },
+  "mower_init_allow": {
+   "sites": [
+    {
+     "rva": "0x17a57",
+     "on": "01",
+     "off": "00",
+     "source": "toolkit:init_lawn_mowers"
+    }
+   ],
+   "level": "low",
+   "temporary": true
+  },
+  "mower_init_no_anim": {
+   "sites": [
+    {
+     "rva": "0x65f62",
+     "on": "94787200",
+     "off": "787a7200",
+     "source": "toolkit:lawn_mower_initialize"
+    }
+   ],
+   "level": "low",
+   "temporary": true
+  },
+  "plant_invincible": {
+   "sites": [
+    {
+     "rva": "0x14ba6b",
+     "on": "464000",
+     "off": "4640fc",
+     "source": "toolkit:plant_immune_eat"
+    },
+    {
+     "rva": "0x2883f",
+     "on": "eb",
+     "off": "74",
+     "source": "toolkit:plant_immune_radius"
+    },
+    {
+     "rva": "0x14316a",
+     "on": "eb",
+     "off": "75",
+     "source": "toolkit:plant_immune_jalapeno"
+    },
+    {
+     "rva": "0x7c3db",
+     "on": "909090",
+     "off": "295040",
+     "source": "toolkit:plant_immune_projectile"
+    },
+    {
+     "rva": "0x7cb99",
+     "on": "909090",
+     "off": "294e40",
+     "source": "toolkit:plant_immune_lob_motion"
+    },
+    {
+     "rva": "0x14a6ab",
+     "on": "eb",
+     "off": "74",
+     "source": "toolkit:plant_immune_square"
+    },
+    {
+     "rva": "0x6d13a",
+     "on": "70",
+     "off": "75",
+     "source": "toolkit:plant_immune_row_area"
+    },
+    {
+     "rva": "0x6cf96",
+     "on": "00",
+     "off": "ce",
+     "source": "toolkit:plant_immune_spike_rock"
+    },
+    {
+     "rva": "0x70f80",
+     "on": "c20400",
+     "off": "53558b",
+     "source": "toolkit:plant_immune_squish"
+    }
+   ],
+   "level": "low",
+   "excludes": [
+    "plant_fragile"
+   ]
+  },
+  "plant_fragile": {
+   "sites": [
+    {
+     "rva": "0x14ba6b",
+     "on": "664000",
+     "off": "4640fc",
+     "source": "toolkit:_plant_immune_eat"
+    },
+    {
+     "rva": "0x7c3db",
+     "on": "294040",
+     "off": "295040",
+     "source": "toolkit:_plant_immune_projectile"
+    },
+    {
+     "rva": "0x7cb99",
+     "on": "297640",
+     "off": "294e40",
+     "source": "toolkit:_plant_immune_lob_motion"
+    },
+    {
+     "rva": "0x6d13a",
+     "on": "eb",
+     "off": "75",
+     "source": "toolkit:_plant_immune_row_area"
+    }
+   ],
+   "level": "low",
+   "excludes": [
+    "plant_invincible"
+   ]
+  },
+  "zombie_invincible": {
+   "sites": [
+    {
+     "rva": "0x14d0ba",
+     "on": "90909090",
+     "off": "2b6c2420",
+     "source": "toolkit:zombie_immune_body_damage"
+    },
+    {
+     "rva": "0x14cdd4",
+     "on": "2bc0",
+     "off": "2bc8",
+     "source": "toolkit:zombie_immune_helm_damage"
+    },
+    {
+     "rva": "0x14ca2b",
+     "on": "33c033d2",
+     "off": "7c028bc2",
+     "source": "toolkit:zombie_immune_shield_damage"
+    },
+    {
+     "rva": "0x14e951",
+     "on": "81",
+     "off": "8d",
+     "source": "toolkit:zombie_immune_burn_crumble"
+    },
+    {
+     "rva": "0x29523",
+     "on": "eb",
+     "off": "7f",
+     "source": "toolkit:zombie_immune_radius"
+    },
+    {
+     "rva": "0x74962",
+     "on": "eb",
+     "off": "75",
+     "source": "toolkit:zombie_immune_burn_row"
+    },
+    {
+     "rva": "0x6f808",
+     "on": "eb",
+     "off": "74",
+     "source": "toolkit:zombie_immune_chomper"
+    },
+    {
+     "rva": "0x14b7ff",
+     "on": "00",
+     "off": "01",
+     "source": "toolkit:zombie_immune_mind_controll"
+    },
+    {
+     "rva": "0x74a71",
+     "on": "9090",
+     "off": "7405",
+     "source": "toolkit:zombie_immune_blow_away"
+    },
+    {
+     "rva": "0x7c843",
+     "on": "eb",
+     "off": "74",
+     "source": "toolkit:zombie_immune_splash"
+    },
+    {
+     "rva": "0x66785",
+     "on": "eb",
+     "off": "74",
+     "source": "toolkit:zombie_immune_lawn_mower"
+    }
+   ],
+   "level": "low",
+   "excludes": [
+    "zombie_fragile"
+   ]
+  },
+  "zombie_fragile": {
+   "sites": [
+    {
+     "rva": "0x14d0ba",
+     "on": "2bed9090",
+     "off": "2b6c2420",
+     "source": "toolkit:_zombie_immune_body_damage"
+    },
+    {
+     "rva": "0x14cdd4",
+     "on": "2bc9",
+     "off": "2bc8",
+     "source": "toolkit:_zombie_immune_helm_damage"
+    },
+    {
+     "rva": "0x14ca2b",
+     "on": "8bd08bc2",
+     "off": "7c028bc2",
+     "source": "toolkit:_zombie_immune_shield_damage"
+    },
+    {
+     "rva": "0x14e951",
+     "on": "80",
+     "off": "8d",
+     "source": "toolkit:_zombie_immune_burn_crumble"
+    }
+   ],
+   "level": "low",
+   "excludes": [
+    "zombie_invincible"
+   ]
+  },
+  "instant_reload": {
+   "sites": [
+    {
+     "rva": "0x6f40b",
+     "on": "80",
+     "off": "85",
+     "source": "toolkit:reload_instantly"
+    },
+    {
+     "rva": "0x6e224",
+     "on": "80",
+     "off": "85",
+     "source": "toolkit:grow_up_quickly"
+    },
+    {
+     "rva": "0x6df73",
+     "on": "70",
+     "off": "75",
+     "source": "toolkit:grow_up_quickly"
+    },
+    {
+     "rva": "0x6f925",
+     "on": "70",
+     "off": "75",
+     "source": "toolkit:no_cooldown"
+    },
+    {
+     "rva": "0x70217",
+     "on": "80",
+     "off": "85",
+     "source": "toolkit:no_cooldown"
+    }
+   ],
+   "level": "low"
+  },
+  "mushrooms_awake": {
+   "sites": [
+    {
+     "rva": "0x6c1c2",
+     "on": "eb",
+     "off": "74",
+     "source": "toolkit:mushrooms_awake"
+    }
+   ],
+   "level": "low"
+  },
+  "pause_spawning": {
+   "sites": [
+    {
+     "rva": "0x318bc",
+     "on": "eb",
+     "off": "74",
+     "source": "toolkit:stop_spawning"
+    }
+   ],
+   "level": "low"
+  },
+  "freeze_zombies": {
+   "sites": [
+    {
+     "rva": "0x146823",
+     "on": "54",
+     "off": "64",
+     "source": "toolkit:stop_zombies"
+    },
+    {
+     "rva": "0x14682c",
+     "on": "54",
+     "off": "44",
+     "source": "toolkit:stop_zombies"
+    }
+   ],
+   "level": "low"
+  },
+  "always_butter": {
+   "sites": [
+    {
+     "rva": "0x6d542",
+     "on": "70",
+     "off": "75",
+     "source": "toolkit:lock_butter"
+    }
+   ],
+   "level": "low"
+  },
+  "no_crater": {
+   "sites": [
+    {
+     "rva": "0x293cd",
+     "on": "70",
+     "off": "75",
+     "source": "toolkit:no_crater"
+    }
+   ],
+   "level": "low"
+  },
+  "no_ice_trail": {
+   "sites": [
+    {
+     "rva": "0x1464a0",
+     "on": "c3",
+     "off": "51",
+     "source": "toolkit:no_ice_trail"
+    },
+    {
+     "rva": "0x2b0b9",
+     "on": "eb",
+     "off": "75",
+     "source": "toolkit:no_ice_trail"
+    }
+   ],
+   "level": "low"
+  },
+  "no_explode": {
+   "sites": [
+    {
+     "rva": "0x14257c",
+     "on": "81",
+     "off": "8f",
+     "source": "toolkit:zombie_not_explode"
+    },
+    {
+     "rva": "0x14305d",
+     "on": "81",
+     "off": "85",
+     "source": "toolkit:zombie_not_explode"
+    }
+   ],
+   "level": "low"
+  },
+  "street_zombies_hack": {
+   "sites": [
+    {
+     "rva": "0x45d33",
+     "on": "80",
+     "off": "85",
+     "source": "toolkit:hack_street_zombies"
+    }
+   ],
+   "level": "low",
+   "temporary": true
+  },
+  "no_fog": {
+   "sites": [
+    {
+     "rva": "0x2616d",
+     "on": "31d2",
+     "off": "3bf2",
+     "source": "toolkit:no_fog"
+    }
+   ],
+   "level": "low"
+  },
+  "see_vase": {
+   "sites": [
+    {
+     "rva": "0x59c1a",
+     "on": "66b83300",
+     "off": "85c07e04",
+     "source": "toolkit:see_vase"
+    }
+   ],
+   "level": "low"
+  },
+  "background_running": {
+   "sites": [
+    {
+     "rva": "0x224919",
+     "on": "eb00",
+     "off": "7440",
+     "source": "toolkit:background_running"
+    }
+   ],
+   "level": "low"
+  },
+  "userdata_readonly": {
+   "sites": [
+    {
+     "rva": "0x220143",
+     "on": "70",
+     "off": "74",
+     "source": "toolkit:disable_delete_userdata"
+    },
+    {
+     "rva": "0x97ed3",
+     "on": "f1791800",
+     "off": "c9791800",
+     "source": "toolkit:disable_save_userdata"
+    }
+   ],
+   "level": "high"
+  },
+  "show_limbo_page": {
+   "sites": [
+    {
+     "rva": "0x3935a",
+     "on": "385864",
+     "off": "885864",
+     "source": "toolkit:unlock_limbo_page"
+    }
+   ],
+   "level": "low"
+  }
+ },
+ "functions": {
+  "put_plant": {
+   "rva": "0x18d70",
+   "conv": "goty_zh2012.put_plant",
+   "source": "toolkit:call_put_plant"
+  },
+  "put_plant_imitater": {
+   "rva": "0x75050",
+   "conv": "goty_zh2012.put_plant_imitater",
+   "source": "toolkit:call_put_plant_imitater"
+  },
+  "put_plant_iz_style": {
+   "rva": "0x357d0",
+   "conv": "goty_zh2012.put_plant_iz_style",
+   "source": "toolkit:call_put_plant_iz_style"
+  },
+  "put_zombie": {
+   "rva": "0x35390",
+   "conv": "goty_zh2012.put_zombie",
+   "source": "toolkit:call_put_zombie"
+  },
+  "put_zombie_in_row": {
+   "rva": "0x19a60",
+   "conv": "goty_zh2012.put_zombie_in_row",
+   "source": "toolkit:call_put_zombie_in_row"
+  },
+  "put_grave": {
+   "rva": "0x31900",
+   "conv": "goty_zh2012.put_grave",
+   "source": "toolkit:call_put_grave"
+  },
+  "put_ladder": {
+   "rva": "0x14d10",
+   "conv": "goty_zh2012.put_ladder",
+   "source": "toolkit:call_put_ladder"
+  },
+  "put_rake": {
+   "rva": "0x17710",
+   "conv": "goty_zh2012.put_rake",
+   "source": "toolkit:call_put_rake",
+   "temp_patch": {
+    "row_site": "0x1786a",
+    "row_len": 6,
+    "col_site": "0x177d3",
+    "col_len": 8
+   }
+  },
+  "mower_start": {
+   "rva": "0x66cf0",
+   "conv": "goty_zh2012.mower_start",
+   "source": "toolkit:call_start_lawn_mower"
+  },
+  "mower_delete": {
+   "rva": "0x66c60",
+   "conv": "goty_zh2012.mower_delete",
+   "source": "toolkit:call_delete_lawn_mower"
+  },
+  "mower_restore": {
+   "rva": "0x179b0",
+   "conv": "goty_zh2012.mower_restore",
+   "source": "toolkit:call_restore_lawn_mower"
+  },
+  "delete_plant": {
+   "rva": "0x75e90",
+   "conv": "goty_zh2012.delete_plant",
+   "source": "toolkit:call_delete_plant"
+  },
+  "delete_grid_item": {
+   "rva": "0x58620",
+   "conv": "goty_zh2012.delete_grid_item",
+   "source": "toolkit:call_delete_grid_item"
+  },
+  "set_plant_sleeping": {
+   "rva": "0x6cb90",
+   "conv": "goty_zh2012.set_plant_sleeping",
+   "source": "toolkit:call_set_plant_sleeping"
+  },
+  "puzzle_next_stage_clear": {
+   "rva": "0x350f0",
+   "conv": "goty_zh2012.puzzle_next_stage_clear",
+   "source": "toolkit:call_puzzle_next_stage_clear"
+  },
+  "pick_background": {
+   "rva": "0x15e90",
+   "conv": "goty_zh2012.pick_background",
+   "source": "toolkit:call_pick_background"
+  },
+  "delete_particle_system": {
+   "rva": "0x12b620",
+   "conv": "goty_zh2012.delete_particle_system",
+   "source": "toolkit:call_delete_particle_system"
+  },
+  "pick_zombie_waves": {
+   "rva": "0x150c0",
+   "conv": "goty_zh2012.pick_zombie_waves",
+   "source": "toolkit:call_pick_zombie_waves"
+  },
+  "remove_cutscene_zombies": {
+   "rva": "0x19c50",
+   "conv": "goty_zh2012.remove_cutscene_zombies",
+   "source": "toolkit:call_remove_cutscene_zombies"
+  },
+  "place_street_zombies": {
+   "rva": "0x45d20",
+   "conv": "goty_zh2012.place_street_zombies",
+   "source": "toolkit:call_place_street_zombies"
+  },
+  "play_music": {
+   "rva": "0x69a10",
+   "conv": "goty_zh2012.play_music",
+   "source": "toolkit:call_play_music"
+  },
+  "sync_profile": {
+   "rva": "0x55420",
+   "conv": "goty_zh2012.sync_profile",
+   "source": "toolkit:call_sync_profile"
+  },
+  "fade_out_level": {
+   "rva": "0x18140",
+   "conv": "goty_zh2012.fade_out_level",
+   "source": "toolkit:call_fade_out_level"
+  },
+  "wisdom_tree_grow": {
+   "rva": "0x385d0",
+   "conv": "goty_zh2012.wisdom_tree_grow",
+   "source": "toolkit:call_wisdom_tree"
+  }
+ },
+ "extra": {},
+ "gates": {
+  "spawn_preview": {
+   "mode": [
+    [
+     1,
+     15
+    ]
+   ],
+   "note": "modes 1-5: first 10 waves only"
+  },
+  "spawn_stats": {
+   "mode": [
+    [
+     1,
+     15
+    ]
+   ]
+  },
+  "apply_lineup": {
+   "mode": [
+    [
+     11,
+     15
+    ],
+    [
+     61,
+     70
+    ]
+   ]
+  },
+  "endless_round": {
+   "mode": [
+    [
+     11,
+     15
+    ],
+    [
+     60,
+     60
+    ],
+    [
+     70,
+     70
+    ]
+   ]
+  },
+  "fill_flower_pots": {
+   "scene": [
+    4,
+    5
+   ]
+  },
+  "wisdom_tree_grow": {
+   "mode": [
+    [
+     50,
+     50
+    ]
+   ]
+  },
+  "mower_ops": {
+   "ui": [
+    3
+   ]
+  },
+  "level_clear": {
+   "ui": [
+    3
+   ]
+  },
+  "field_ops": {
+   "ui": [
+    2,
+    3
+   ]
+  }
+ }
+}

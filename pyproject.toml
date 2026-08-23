@@ -13,7 +13,7 @@ license-files = ["LICENSE"]
 authors = [{ name = "Blue Rose" }]
 keywords = ["pvz", "plants-vs-zombies", "植物大战僵尸", "轨道", "键控", "memory", "automation"]
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Intended Audience :: End Users/Desktop",
     "Operating System :: Microsoft :: Windows",
@@ -23,12 +23,20 @@ classifiers = [
 ]
 dependencies = []
 
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+pvztools = "pvztools.cli.__main__:main"
+
 [project.urls]
 Homepage = "https://github.com/BlueRoseMike/pvztools"
 Issues = "https://github.com/BlueRoseMike/pvztools/issues"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/pvztools"]
+# non-.py package data: the lineup catalogue + address profiles (nothing else)
+include = ["src/pvztools/**/*.py", "src/pvztools/data/*.json", "src/pvztools/addr/profiles/*.json"]
 
 [tool.hatch.build.targets.sdist]
 include = ["src/pvztools", "README.md", "LICENSE", "pyproject.toml"]

@@ -1,0 +1,144 @@
+{
+ "schema_version": 2,
+ "generated_by": "tools/import_toolkit_profiles.py",
+ "source": "facts derived from lmintlcx/pvztoolkit data.cpp (GPL-3.0); GPL source not copied, numbers re-expressed per docs/parity-pvztoolkit.md §6",
+ "window_titles": [
+  "Plants vs. Zombies",
+  "Plants vs. Zombies GOTY",
+  "植物大战僵尸"
+ ],
+ "process_names": [
+  "PlantsVsZombies.exe",
+  "popcapgame1.exe"
+ ],
+ "by_stamp": {
+  "0x49359c21": "beta_0_1_1_1014_en.json",
+  "0x499a6204": "beta_0_9_9_1029_en.json",
+  "0x49ecf563": "1_0_0_1051_en.json",
+  "0x4a37d6af": "1_2_0_1065_en.json",
+  "0x4a5b7963": "1_0_4_7924_es.json",
+  "0x4c237519": "1_0_7_3556_es.json",
+  "0x4ce4c3d6": "1_0_7_3467_ru.json",
+  "0x4c2e3453": "goty_1_2_0_1073_en.json",
+  "0x4d02b058": "goty_1_2_0_1096_en.json",
+  "0x4ca31baa": "goty_1_2_0_1093_de_es_fr_it.json",
+  "0x4c563de1": "goty_1_1_0_1056_zh.json",
+  "0x4cc8e5f8": "goty_1_1_0_1056_ja.json",
+  "0x4fcd7be2": "goty_1_1_0_1056_zh_2012_06.json",
+  "0x5003d437": "goty_1_1_0_1056_zh_2012_07.json"
+ },
+ "profiles": [
+  {
+   "id": "beta_0_1_1_1014_en",
+   "file": "beta_0_1_1_1014_en.json",
+   "stamp": "0x49359c21",
+   "name": "0.1.1.1014 Beta (en)",
+   "family": "beta",
+   "verified": false
+  },
+  {
+   "id": "beta_0_9_9_1029_en",
+   "file": "beta_0_9_9_1029_en.json",
+   "stamp": "0x499a6204",
+   "name": "0.9.9.1029 Beta (en)",
+   "family": "beta",
+   "verified": false
+  },
+  {
+   "id": "1_0_0_1051_en",
+   "file": "1_0_0_1051_en.json",
+   "stamp": "0x49ecf563",
+   "name": "1.0.0.1051 (en)",
+   "family": "retail",
+   "verified": true
+  },
+  {
+   "id": "1_2_0_1065_en",
+   "file": "1_2_0_1065_en.json",
+   "stamp": "0x4a37d6af",
+   "name": "1.2.0.1065 (en)",
+   "family": "retail",
+   "verified": false
+  },
+  {
+   "id": "1_0_4_7924_es",
+   "file": "1_0_4_7924_es.json",
+   "stamp": "0x4a5b7963",
+   "name": "1.0.4.7924 (es)",
+   "family": "retail",
+   "verified": false
+  },
+  {
+   "id": "1_0_7_3556_es",
+   "file": "1_0_7_3556_es.json",
+   "stamp": "0x4c237519",
+   "name": "1.0.7.3556 (es)",
+   "family": "retail",
+   "verified": false
+  },
+  {
+   "id": "1_0_7_3467_ru",
+   "file": "1_0_7_3467_ru.json",
+   "stamp": "0x4ce4c3d6",
+   "name": "1.0.7.3467 (ru)",
+   "family": "retail",
+   "verified": false
+  },
+  {
+   "id": "goty_1_2_0_1073_en",
+   "file": "goty_1_2_0_1073_en.json",
+   "stamp": "0x4c2e3453",
+   "name": "1.2.0.1073 GOTY Origin (en)",
+   "family": "goty",
+   "verified": false
+  },
+  {
+   "id": "goty_1_2_0_1096_en",
+   "file": "goty_1_2_0_1096_en.json",
+   "stamp": "0x4d02b058",
+   "name": "1.2.0.1096 GOTY Steam (en)",
+   "family": "goty",
+   "verified": true
+  },
+  {
+   "id": "goty_1_2_0_1093_de_es_fr_it",
+   "file": "goty_1_2_0_1093_de_es_fr_it.json",
+   "stamp": "0x4ca31baa",
+   "name": "1.2.0.1093 GOTY Origin (de/es/fr/it)",
+   "family": "goty",
+   "verified": false
+  },
+  {
+   "id": "goty_1_1_0_1056_zh",
+   "file": "goty_1_1_0_1056_zh.json",
+   "stamp": "0x4c563de1",
+   "name": "1.1.0.1056 GOTY 2010 (zh)",
+   "family": "goty_zh2010_ja",
+   "verified": false
+  },
+  {
+   "id": "goty_1_1_0_1056_ja",
+   "file": "goty_1_1_0_1056_ja.json",
+   "stamp": "0x4cc8e5f8",
+   "name": "1.1.0.1056 GOTY (ja)",
+   "family": "goty_zh2010_ja",
+   "verified": false
+  },
+  {
+   "id": "goty_1_1_0_1056_zh_2012_06",
+   "file": "goty_1_1_0_1056_zh_2012_06.json",
+   "stamp": "0x4fcd7be2",
+   "name": "1.1.0.1056 GOTY 2012 (zh)",
+   "family": "goty_zh2012",
+   "verified": false
+  },
+  {
+   "id": "goty_1_1_0_1056_zh_2012_07",
+   "file": "goty_1_1_0_1056_zh_2012_07.json",
+   "stamp": "0x5003d437",
+   "name": "1.1.0.1056 GOTY 2012 (zh)",
+   "family": "goty_zh2012",
+   "verified": false
+  }
+ ]
+}

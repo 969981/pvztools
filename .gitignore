@@ -7,3 +7,9 @@ dist/
 .pytest_cache/
 .idea/
 .vscode/
+
+# local tooling / private analysis (never publish)
+/tools/
+/dist/
+/docs/reports/*.html
+*.log

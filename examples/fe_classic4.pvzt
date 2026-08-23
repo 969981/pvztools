@@ -1,0 +1,17 @@
+# [FE] 经典四炮，邻C6u —— 来自 AvZ 教程
+scene: FE
+lineup: LI43NMQIfe3BVVEc+sHIXUAPX7dvSCBUt1TS1OE8dn9XgraGkdQ1ZlSKiEUaVw==
+cards: IINAW LPccc
+zombies: 普杆舞车豚 丑气矿篮偷 红
+rhythm: 邻C6u  I-PP|I-PP|N|PP (1976|1976|750|749)
+
+w1%4, 2~9%2, 11~19 len 1976
+  I 11 @ 3 5
+  PP 1776 @ 25 8.75
+w10 len 750
+  PP 341 @ 25 9
+  A 401 @ 2 9 & W 401 @ 5 9
+w20 len 5500
+  PP 341 @ 25 9
+  I 395 @ 3 5
+  PP 2000 @ 25 9
