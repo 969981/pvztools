@@ -25,6 +25,7 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest"]
+gui = ["imgui-bundle>=1.6", "glfw>=2.6", "pillow>=9"]
 
 [project.scripts]
 pvztools = "pvztools.cli.__main__:main"

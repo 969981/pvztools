@@ -151,7 +151,10 @@ def ro():
 # ---------------------------------------------------------------------------
 
 def test_top_level_exports():
-    assert pvztools.__version__ == "0.0.1"
+    import re, pathlib
+    pyproject = pathlib.Path(__file__).resolve().parents[1] / "pyproject.toml"
+    m = re.search(r'^version = "([^"]+)"', pyproject.read_text(encoding="utf-8"), re.M)
+    assert pvztools.__version__ == m.group(1)
     assert callable(pvztools.attach) and callable(pvztools.scan_exe)
     assert pvztools.Game is Game
     assert pvztools.PermissionDenied is PermissionDenied

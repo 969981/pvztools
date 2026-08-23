@@ -16,6 +16,7 @@ from .codec import (
     parse_lineup_string,
 )
 from .model import COLS, MAY_SLEEP, PROP_NAMES, Cell, Lineup, is_day_scene
+from .human import Human1437Error, parse_1437, to_1437
 
 from_arraydesign = parse_lineup_string
 to_arraydesign = dump_lineup_string
@@ -33,6 +34,9 @@ __all__ = [
     "dump_lineup_string",
     "from_arraydesign",
     "to_arraydesign",
+    "parse_1437",
+    "to_1437",
+    "Human1437Error",
     "STRING_SCENE_ORDER",
     "ID_LADDER",
     "ID_RAKE",

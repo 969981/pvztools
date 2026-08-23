@@ -119,6 +119,8 @@ pvztools bench-clock --seconds 10
 
 AsmVsZombies (AvZ)、lmintlcx/pvz、pvzclass、PvZ-Emulator、Seml、re-plants、LonelyStar / 囧丫乙 阵型库（ArrayDesign）、白菜 / Be2SiO4 / 轨道读本 等社区工作。本项目站在他们的肩膀上。
 
+特别感谢 **3C妹妹**（3C八炮无尽阵型）与 **1437大帝**（1437 完美阵型与文本格式）——他们的作品直接启发了本项目的默认阵型与 1437 阵型格式。
+
 ### 免责声明
 
 - 本包**不包含任何游戏文件**、资源或地址表以外的游戏数据。
@@ -201,6 +203,8 @@ Exit codes: 0 ok, 1 bad arguments, 2 lint errors, 3 game not running / not in a 
 ### Credits
 
 AsmVsZombies (AvZ), lmintlcx/pvz, pvzclass, PvZ-Emulator, Seml, re-plants, the LonelyStar / 囧丫乙 lineup database (ArrayDesign), 白菜 / Be2SiO4 / 轨道读本 and the wider community. This project stands on their work.
+
+Special thanks to **3C妹妹** (the 3C-cob endless lineup) and **1437大帝** (the 1437 perfect lineup and its text format) — their work directly inspired this project's default lineups and the 1437 lineup format.
 
 ### Disclaimer
 

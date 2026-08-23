@@ -48,7 +48,8 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 __all__ = [
     "Anchor", "compile_sig", "sig_from_bytes", "generalize", "sig_to_text",
     "SUN_CAP_ANCHORS", "LAWN_GLOBAL_ANCHORS", "NULL_CHECK_ANCHORS",
-    "BOARD_SHIFT_ANCHOR", "FUNCTION_ANCHORS", "PATCH_ANCHORS", "DEFAULT_ANCHORS",
+    "BOARD_SHIFT_ANCHOR", "FUNCTION_ANCHORS", "PATCH_ANCHORS", "FIELD_OFF_ANCHORS",
+    "DEFAULT_ANCHORS",
     "LAWN_FAMILIES", "BOARD_1051_HIGH_FIELDS", "SUN_1051", "SUN_CAP",
     "MODRM_DISP32",
     "BOARD_SIZE_1051", "CORE_FUNCTIONS",
@@ -643,7 +644,31 @@ def _build_patch_anchors() -> Tuple[Anchor, ...]:
 FUNCTION_ANCHORS: Tuple[Anchor, ...] = _build_function_anchors()
 PATCH_ANCHORS: Tuple[Anchor, ...] = _build_patch_anchors()
 
+#: SexyAppBase field-offset signatures (kind ``field_off``): find a unique
+#: framework instruction that references the field by literal displacement and
+#: read that displacement.  The anchor bytes are SexyAppFramework registry-
+#: serialization / ctor code (改版 essentially never touch it), so these hold
+#: across game-logic mods; a genuinely different framework recompile simply
+#: yields 0 hits (safe capability downgrade) rather than a wrong offset.
+#: Verified on goty_1_2_0_1096_en: exactly one hit each, recovering 0x367/0x64C.
+FIELD_OFF_ANCHORS: Tuple[Anchor, ...] = (
+    # movzx ecx, byte [reg+mIsWindowed]; neg/sbb/add  (WriteToRegistry "ScreenMode")
+    Anchor("lawn_app.is_windowed", "field_off",
+           compile_sig("0F B6 ?? 67 03 00 00 F7 D9 1B C9 83 C1 01"),
+           (("u32", 3, "lawn_app.is_windowed"),),
+           (), "==1",
+           {"expect_off": 0x367, "off_range": (0x100, 0x2000),
+            "src": "SexyAppBase::WriteToRegistry"}),
+    # mov byte [reg+mAllowAltEnter], 1  (SexyAppBase ctor member-init)
+    Anchor("lawn_app.allow_alt_enter", "field_off",
+           compile_sig("C6 ?? 4C 06 00 00 01"),
+           (("u32", 2, "lawn_app.allow_alt_enter"),),
+           (), "==1",
+           {"expect_off": 0x64C, "off_range": (0x100, 0x2000),
+            "src": "SexyAppBase::SexyAppBase ctor"}),
+)
+
 DEFAULT_ANCHORS: Tuple[Anchor, ...] = (
     SUN_CAP_ANCHORS + LAWN_GLOBAL_ANCHORS + NULL_CHECK_ANCHORS + (BOARD_SHIFT_ANCHOR,)
-    + FUNCTION_ANCHORS + PATCH_ANCHORS
+    + FUNCTION_ANCHORS + PATCH_ANCHORS + FIELD_OFF_ANCHORS
 )

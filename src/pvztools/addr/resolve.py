@@ -308,6 +308,21 @@ def _profile_from_scan(scan: ScanResult, identity: Dict[str, Any], image_base: i
             fs["lawn_app." + k] = "scan"
         else:
             srcs["lawn_app." + k] = "template"
+    # display-mode fields discovered by field_off signatures (not in templates);
+    # the SexyAppBase guards sit at fixed +3/+4 after mIsWindowed.
+    iw = scan.found.get("lawn_app.is_windowed")
+    if iw is not None:
+        raw["lawn_app"]["is_windowed"] = "0x%x" % iw
+        raw["lawn_app"]["force_fullscreen"] = "0x%x" % (iw + 3)
+        raw["lawn_app"]["force_windowed"] = "0x%x" % (iw + 4)
+        for k in ("is_windowed", "force_fullscreen", "force_windowed"):
+            srcs["lawn_app." + k] = "scan"
+            fs["lawn_app." + k] = "scan"
+    aae = scan.found.get("lawn_app.allow_alt_enter")
+    if aae is not None:
+        raw["lawn_app"]["allow_alt_enter"] = "0x%x" % aae
+        srcs["lawn_app.allow_alt_enter"] = "scan"
+        fs["lawn_app.allow_alt_enter"] = "scan"
     # board fields: scanned high-range ones; the rest from the template,
     # moved by the detected shift when it differs from the template's own
     # (DESIGN §3.5: GOTY Board fields >= 0x90 move with the shift)

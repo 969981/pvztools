@@ -388,6 +388,127 @@ class GameWindow:
             self._sleep(settle)
         return ok and self.is_foreground()
 
+    # -- display mode (fullscreen / windowed) ---------------------------------
+    #: LawnApp/SexyAppBase field offsets governing the fullscreen<->windowed
+    #: switch.  Own reverse-engineering (not toolkit data), verified on the
+    #: Steam GOTY build; keyed by profile id.  ``mIsWindowed`` (byte, 1=win),
+    #: ``mForceFullscreen``/``mForceWindowed`` guards, ``mAllowAltEnter`` dword.
+    _DISPLAY_OFFSETS = {
+        "goty_1_2_0_1096_en": {
+            "is_windowed": 0x367, "force_fullscreen": 0x36A,
+            "force_windowed": 0x36B, "allow_alt_enter": 0x64C,
+        },
+    }
+
+    def _lawn_field(self, name: str) -> Optional[int]:
+        """Absolute VA of a LawnApp field, or ``None`` if unmapped.
+
+        Prefers a profile-provided offset (future builds may carry it); falls
+        back to the built-in per-version table above.
+        """
+        prof = self.profile
+        if prof is None:
+            return None
+        off = getattr(getattr(prof, "lawn_app", None), name, None)
+        if off is None:
+            ver = str(getattr(prof, "id", "") or getattr(prof, "version_id", ""))
+            off = self._DISPLAY_OFFSETS.get(ver, {}).get(name)
+        if off is None:
+            return None
+        try:
+            lawn = self.observer.lawn_ptr()
+        except Exception:
+            return None
+        if not lawn:
+            return None
+        return lawn + int(off)
+
+    def is_windowed(self) -> Optional[bool]:
+        """``True`` windowed, ``False`` fullscreen, ``None`` if not readable.
+
+        Reads ``LawnApp::mIsWindowed`` (byte, 1 = windowed).
+        """
+        addr = self._lawn_field("is_windowed")
+        if addr is None:
+            return None
+        try:
+            return bool(self.session.read(addr, 1)[0])
+        except Exception:
+            return None
+
+    def can_switch_display(self) -> bool:
+        """Whether an Alt+Enter switch is currently permitted by the game.
+
+        Guarded by ``mForceFullscreen`` / ``mForceWindowed`` (both must be 0,
+        set only on a DirectDraw fallback failure) and ``mAllowAltEnter`` != 0.
+        """
+        try:
+            for name, want_zero in (("force_fullscreen", True), ("force_windowed", True)):
+                a = self._lawn_field(name)
+                if a is not None and bool(self.session.read(a, 1)[0]) is want_zero:
+                    return False
+            a = self._lawn_field("allow_alt_enter")
+            if a is not None and self.session.read_u32(a) == 0:
+                return False
+        except Exception:
+            return False
+        return True
+
+    def set_windowed(self, want: bool, *, timeout: float = 2.5,
+                     poll: float = 0.05) -> Optional[bool]:
+        """Switch the game to windowed / fullscreen the *safe* way.
+
+        Never remote-calls ``SwitchScreenMode`` (it recreates the window +
+        DDraw surfaces from a foreign thread → crash).  Instead posts the
+        game's own Alt+Enter (``WM_SYSKEYDOWN`` ``VK_RETURN``); the game's main
+        loop performs the switch at its natural point via
+        ``ProcessDeferredMessages``.  Returns the resulting windowed state, or
+        ``None`` when the mode is not readable / not switchable on this build.
+        Requires the game's main loop to be running (do not hold
+        ``main_loop_block`` while waiting).
+        """
+        current = self.is_windowed()
+        if current is None:
+            return None
+        # 让游戏可见且在跑：最小化 / 失焦时主循环会暂停，延迟的 Alt+Enter
+        # 就不会被处理，切换也就“没反应”。先恢复+置前再切。
+        if bool(want):
+            try:
+                if not self.is_foreground():
+                    self.bring_to_foreground(settle=0.2)
+            except Exception:  # noqa: BLE001
+                pass
+        if current == bool(want):
+            return current
+        if not self.can_switch_display():
+            return current
+        if self.dry_run:
+            self.history.append((int(self.user32.WM_SYSKEYDOWN),
+                                 int(self.user32.VK_RETURN), 0, 0))
+            return current
+        hwnd = self.hwnd
+        u = self.user32
+        # Alt+Enter: SYSKEYDOWN carries the ALT context bit (lparam bit 29).
+        u.post_message(hwnd, u.WM_SYSKEYDOWN, u.VK_RETURN, 0x20000001)
+        u.post_message(hwnd, u.WM_SYSKEYUP, u.VK_RETURN, 0xE0000001)
+        deadline = self._clock() + float(timeout)
+        result = current
+        while self._clock() < deadline:
+            self._sleep(poll)
+            now = self.is_windowed()
+            if now is not None and now == bool(want):
+                result = now
+                break
+        else:
+            result = self.is_windowed()
+        # 切到窗口后再恢复+置前一次（切换可能重建窗口）
+        if bool(want):
+            try:
+                self.bring_to_foreground(settle=0.15)
+            except Exception:  # noqa: BLE001
+                pass
+        return result
+
     def background_running(self) -> Optional[bool]:
         """State of the ``background_running`` patch (``None`` = unknown)."""
         pm = self.patches

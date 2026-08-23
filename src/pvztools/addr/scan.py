@@ -369,8 +369,35 @@ def scan_image(text: bytes, text_va: int, data_range: Tuple[int, int],
         _scan_board_shift(text, sun, shift_anchor, res)
     _scan_unique(text, text_va, by_kind.get("function", ()), res)
     _scan_unique(text, text_va, by_kind.get("patch", ()), res)
+    _scan_field_offsets(text, text_va, by_kind.get("field_off", ()), res)
     res.elapsed = time.perf_counter() - t0
     return res
+
+
+def _scan_field_offsets(text: bytes, text_va: int, anchors: Sequence[A.Anchor],
+                        res: ScanResult) -> None:
+    """``field_off`` anchors: a unique framework instruction that references a
+    struct field by literal displacement; read the displacement as the offset.
+
+    Records ``res.found[<label>] = offset`` (an offset, not a VA)."""
+    for an in anchors:
+        hits = [m.start() for m in an.compiled().finditer(text)]
+        if len(hits) != 1:
+            res._miss(an.name, "%d hits (expected exactly 1)" % len(hits))
+            continue
+        pos = hits[0]
+        fmt, rel, label = an.extract[0]
+        off = _extract(text, pos, fmt, rel)
+        lo, hi = an.meta.get("off_range", (0, 0x10000))
+        if off is None or not (lo <= off < hi):
+            res._miss(an.name, "extracted offset 0x%s out of range" % (off if off is None else "%x" % off))
+            continue
+        exp = an.meta.get("expect_off")
+        note = "unique %s hit @0x%X, offset 0x%x" % (
+            an.meta.get("src", "field"), text_va + pos, off)
+        if exp is not None and off != exp:
+            note += " (differs from reference 0x%x — variant build)" % exp
+        res._add(label, off, 0.9, note)
 
 
 def _data_range_of(pe: Any) -> Tuple[int, int]:

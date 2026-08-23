@@ -330,6 +330,11 @@ def test_resolve_without_table_uses_scan_then_cache(tmp_path, monkeypatch):
     mod = _ilu.module_from_spec(spec)
     spec.loader.exec_module(mod)
     allowed = {"functions." + k for k in mod.DESIGN_FUNCTIONS_1096} | {"functions.cob_fire", "globals.exe_path_str"}
+    # display-mode field offsets are discovered by field_off AOB signatures
+    # (scan-only; shipped official tables omit them — window.py carries the
+    # verified constant), so a scanned profile legitimately has these extra.
+    allowed |= {"lawn_app.is_windowed", "lawn_app.force_fullscreen",
+                "lawn_app.force_windowed", "lawn_app.allow_alt_enter"}
     assert diff <= allowed, diff
     # second call: cache hit, no rescan
     r2 = R.resolve(STEAM_EXE)

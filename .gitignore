@@ -13,3 +13,6 @@ dist/
 /dist/
 /docs/reports/*.html
 *.log
+
+# imgui / hello_imgui runtime window-state files
+*.ini

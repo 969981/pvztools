@@ -1579,6 +1579,9 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--pid", type=int, help=_("help_pid"))
     p.set_defaults(func=cmd_cobs)
 
+    p = sub.add_parser("gui", help="图形界面（需要 pip install pvztools[gui]）")
+    p.set_defaults(func=cmd_gui)
+
     p = sub.add_parser("fire", help="发炮（--remote --yes）：fire <cobRow> <cobCol> <row> <col>")
     p.add_argument("cob_row", type=int, help="cannon row 1..6")
     p.add_argument("cob_col", type=int, help="cannon LEFT column 1..8")
@@ -1616,6 +1619,20 @@ def build_parser() -> argparse.ArgumentParser:
     _mod_flags(q)
     mod.set_defaults(func=cmd_mod)
     return parser
+
+
+def cmd_gui(args: argparse.Namespace) -> int:
+    from pvztools.gui import gui_available, run_gui
+
+    if not gui_available():
+        from pvztools.i18n import get_language
+
+        if get_language() == "en":
+            print("The GUI needs an extra dependency: pip install pvztools[gui]")
+        else:
+            print("GUI 需要额外依赖：pip install pvztools[gui]")
+        return EXIT_ERROR
+    return run_gui()
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:

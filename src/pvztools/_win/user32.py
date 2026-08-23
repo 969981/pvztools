@@ -23,7 +23,7 @@ __all__ = [
     "GAME_WINDOW_CLASS",
     "WM_KEYDOWN", "WM_KEYUP", "WM_CHAR", "WM_LBUTTONDOWN", "WM_LBUTTONUP",
     "WM_RBUTTONDOWN", "WM_RBUTTONUP", "WM_MOUSEMOVE",
-    "VK_SPACE", "VK_ESCAPE", "VK_RETURN",
+    "VK_SPACE", "VK_ESCAPE", "VK_RETURN", "WM_SYSKEYDOWN", "WM_SYSKEYUP",
     "WindowInfo",
     "find_window", "post_message", "send_message", "enum_windows",
     "get_window_thread_process_id", "get_class_name", "get_window_text",
@@ -38,6 +38,8 @@ GAME_WINDOW_CLASS = "MainWindow"
 
 WM_KEYDOWN = 0x0100
 WM_KEYUP = 0x0101
+WM_SYSKEYDOWN = 0x0104
+WM_SYSKEYUP = 0x0105
 WM_CHAR = 0x0102
 WM_MOUSEMOVE = 0x0200
 WM_LBUTTONDOWN = 0x0201
