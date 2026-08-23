@@ -33,7 +33,7 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __all__ = [
     "__version__", "attach", "scan_exe", "Game",
     "GameNotRunning", "MultipleGames", "ProcessError", "NotInLevel", "PermissionDenied",
