@@ -1,0 +1,148 @@
+name: PvZ upstream sync and release
+on:
+  schedule:
+    - cron: '11 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      force_release:
+        description: 'Publish the current upstream snapshot even if no new commits'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pvz-upstream-sync-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  UPSTREAM_REPO: BlueRoseMike/pvztools
+  UPSTREAM_BRANCH: main
+  BUILD_KIND: python
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.merge.outputs.changed }}
+      commit: ${{ steps.merge.outputs.commit }}
+      upstream_sha: ${{ steps.merge.outputs.upstream_sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Fetch and merge upstream safely
+        id: merge
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add upstream "https://github.com/$UPSTREAM_REPO.git"
+          git fetch --no-tags upstream "$UPSTREAM_BRANCH"
+          upstream_sha="$(git rev-parse FETCH_HEAD)"
+          printf 'upstream_sha=%s\n' "$upstream_sha" >> "$GITHUB_OUTPUT"
+          incoming="$(git rev-list --count HEAD..FETCH_HEAD)"
+          echo "Upstream-only commits: $incoming" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$incoming" -gt 0 ]; then
+            git merge --no-edit FETCH_HEAD
+            git push origin "HEAD:$GITHUB_REF_NAME"
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+          printf 'commit=%s\n' "$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  release:
+    needs: sync
+    if: needs.sync.outputs.changed == 'true' || inputs.force_release == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.sync.outputs.commit }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-java@v4
+        if: env.BUILD_KIND == 'android'
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-dotnet@v4
+        if: env.BUILD_KIND == 'dotnet'
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - name: Try to build suitable distributable
+        id: build
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-files
+          case "$BUILD_KIND" in
+            python)
+              python -m pip install --upgrade build
+              python -m build --outdir release-files
+              ;;
+            dotnet)
+              proj="$(find . -name '*.csproj' -not -path '*/obj/*' | head -n 1)"
+              test -n "$proj"
+              if [ -f PopStudio.ConsoleProject/PopStudio.ConsoleProject.csproj ]; then
+                proj=PopStudio.ConsoleProject/PopStudio.ConsoleProject.csproj
+              fi
+              dotnet publish "$proj" -c Release -o "$RUNNER_TEMP/pvz-dotnet"
+              python -m zipfile -c release-files/dotnet-publish.zip "$RUNNER_TEMP/pvz-dotnet"
+              ;;
+            android)
+              chmod +x gradlew
+              ./gradlew :composeApp:assembleDebug --no-daemon
+              find composeApp -path '*/build/outputs/apk/*' -name '*.apk' -exec cp '{}' release-files/ \;
+              test -n "$(find release-files -name '*.apk' -print -quit)"
+              ;;
+            rust)
+              cargo build --release --locked
+              cp target/release/pvz-bintools.exe release-files/
+              ;;
+            cpp)
+              cmake -S . -B build -G "Visual Studio 17 2022" -A Win32
+              cmake --build build --config Release --parallel
+              find build -type f -iname '*.exe' -not -path '*/CMakeFiles/*' -exec cp '{}' release-files/ \;
+              test -n "$(find release-files -name '*.exe' -print -quit)"
+              ;;
+            source)
+              python -m compileall -q Resource_Tool Player_Tool
+              ;;
+            *)
+              echo "Unknown build kind: $BUILD_KIND" >&2
+              exit 1
+              ;;
+          esac
+      - name: Release only when upstream changed
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MERGED_SHA: ${{ needs.sync.outputs.commit }}
+          UPSTREAM_SHA: ${{ needs.sync.outputs.upstream_sha }}
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
+        run: |
+          set -euo pipefail
+          mkdir -p release-files
+          git archive --format=zip --output="release-files/pvztools-source.zip" HEAD
+          tag="upstream-${UPSTREAM_SHA:0:12}"
+          notes="Source: https://github.com/$UPSTREAM_REPO/commit/$UPSTREAM_SHA
+          Merged commit: $MERGED_SHA
+          Build attempt: $BUILD_OUTCOME
+          The source ZIP is always included; binaries are attached only when built successfully."
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" release-files/* --clobber
+          else
+            gh release create "$tag" release-files/* --target "$MERGED_SHA" --title "pvztools upstream ${UPSTREAM_SHA:0:12}" --notes "$notes"
+          fi
+          echo "Release: $tag ($BUILD_OUTCOME)" >> "$GITHUB_STEP_SUMMARY"
